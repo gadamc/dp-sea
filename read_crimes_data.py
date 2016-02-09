@@ -10,7 +10,9 @@ databaseName = "crimes"
 # in the future will be able to pull not just from database, but from a map-reduce view result!
 # this is available in a Scala notebook now. 
 
-cloudantdata = sqlContext.read.format("com.cloudant.spark").option("cloudant.host",hostname).option("cloudant.username", username).option("cloudant.password",password).load(databaseName)  
+cloudantdata = sqlContext.read.format("com.cloudant.spark").option("cloudant.host",hostname).option("cloudant.username", username).option("cloudant.password",password).load(databaseName).cache()
+
+cloudantdata.printSchema()
 
 print cloudantdata.count()
 
